@@ -33,7 +33,7 @@ Please select an option on your keyboard:
       Show-Menu
     }
     '3' {
-      Write-Host "You selected 3!"
+      Show-Menu
     }
     '4' {
       Start-Process "https://www.discord.com/invite/YmmCnwzwsV"
