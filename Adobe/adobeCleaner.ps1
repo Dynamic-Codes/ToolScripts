@@ -132,13 +132,13 @@ function Remove-AdobeFromExplorer {
     )
 
     Write-Host "[i] Checking in ($dir)"
-    $adobeFolders = Get-ChildItem -Path $dir -Directory -Filter 'Adobe*' -ErrorAction SilentlyContinue
+    $adobeFolders = Get-ChildItem -Path $dir -Directory -Filter 'AdobeTest*' -ErrorAction SilentlyContinue
     if ($adobeFolders) {
         foreach ($adobeFolder in $adobeFolders) {
             Write-Host "[i] Folder found: $($adobeFolder.FullName)"
             Write-Host "[i] Attempting to remove folder $($adobeFolder.FullName)..."
             try {
-                Write-Host "Remove-Item -Path $adobeFolder.FullName -Recurse -Force"
+                Remove-Item -Path $adobeFolder.FullName -Recurse -Force
                 Write-Host "[i] Removed folder $($adobeFolder.FullName)."
             } catch {
                 Write-Host "[!] Unable to remove folder $($adobeFolder.FullName)"
