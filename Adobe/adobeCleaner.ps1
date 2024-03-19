@@ -174,7 +174,21 @@ _______________________________________________________________________
     }
   }
 
-  
+  function Test-Folder {
+    param(
+      [string]$dir
+    )
+
+    Write-Host "[i] Checking directory ($dir)"
+    $adobeFolders = Get-ChildItem -Path $dir -Directory -Filter 'Adobe*' -ErrorAction SilentlyContinue
+    if ($adobeFolders) {
+      foreach ($adobeFolder in $adobeFolders) {
+        Write-Host "[!] Folder not deleted ($adobeFolder)!"
+      }
+    } else {
+      Write-Host "[i] Folder not found (good)"
+    }
+  }
 
   $username = $env:USERNAME
   Update-Folder -dir "C:\Program Files"
@@ -184,6 +198,17 @@ _______________________________________________________________________
   Update-Folder -dir "C:\users\$($username)\appdata\local"
   Update-Folder -dir "C:\users\$($username)\appdata\local\temp"
   Update-Folder -dir "C:\users\$($username)\appdata\roaming"
+  Write-Host @"
+
+[i] Starting presence check...
+"@
+  Test-Folder -dir "C:\Program Files"
+  Test-Folder -dir "C:\Program Files\common files"
+  Test-Folder -dir "C:\Program Files (x86)"
+  Test-Folder -dir "C:\Program Files (x86)\common files"
+  Test-Folder -dir "C:\users\$($username)\appdata\local"
+  Test-Folder -dir "C:\users\$($username)\appdata\local\temp"
+  Test-Folder -dir "C:\users\$($username)\appdata\roaming"
 
 }
 
