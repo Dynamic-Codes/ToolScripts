@@ -44,8 +44,6 @@ Please select an option on your keyboard:
       Exit
     }
     Default {
-      Write-Host "Invalid Choice."
-      Pause
       Show-Menu
     }
   }
@@ -124,15 +122,42 @@ function Remove-AdobeFromExplorer {
                   ADOBE FOLDER AND FILES CLEANER
 =======================================================================
 
+    | You are about to delete ALL Adobe related folders, files,
+    | settings and preferences. This action CAN NOT be undone.
+    | Are you sure you would like to continue?
+    |
+    | [y] Yes, Continue; [n] No, exit 
+
+_______________________________________________________________________
 "@
   
+  $WarningChoice = $host.UI.RawUI.ReadKey("NoEcho,IncludeKeyDown").Character
+
+  switch ($WarningChoice) {
+    'y' {
+      Clear-Host
+      Write-Host = @"
+=======================================================================
+                  ADOBE FOLDER AND FILES CLEANER
+=======================================================================
+"@
+    }
+    'n' {
+      Write-Host "[i] Aborting cleaning process."
+      Start-Sleep 2
+      Show-Menu
+    }
+    Default {
+      Remove-AdobeFromExplorer
+    }
+  }
   function Update-Folder {
     param(
       [string]$dir
     )
 
     Write-Host "[i] Checking in ($dir)"
-    $adobeFolders = Get-ChildItem -Path $dir -Directory -Filter 'AdobeTest*' -ErrorAction SilentlyContinue
+    $adobeFolders = Get-ChildItem -Path $dir -Directory -Filter 'Adobe*' -ErrorAction SilentlyContinue
     if ($adobeFolders) {
         foreach ($adobeFolder in $adobeFolders) {
             Write-Host "[i] Folder found: $($adobeFolder.FullName)"
