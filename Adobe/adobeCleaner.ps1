@@ -3,7 +3,7 @@
 function Show-Menu {
   $menuOptions = @"
 =======================================================================
-                      ADOBE REMNANT CLEANER v1.0
+                ADOBE REMNANT CLEANER - BUILD 200324
 =======================================================================
 
     Options                      Desc
