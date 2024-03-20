@@ -12,7 +12,8 @@ function Show-Menu {
     [2] Explorer Cleaner        | Remove Adobe folders & files
     [3] Registry Cleaner        | Cleanse Window Registry
     -----------------------------------------------------------
-    [4] Discord                 | Get Support from community
+    [4] Validate                | Final check & perform reboot
+    [5] Discord                 | Get Support from community
     -----------------------------------------------------------
     [0] Exit
 _______________________________________________________________________
@@ -33,9 +34,15 @@ Please select an option on your keyboard:
       Show-Menu
     }
     '3' {
+      Remove-AdobeFromRegistry
       Show-Menu
     }
     '4' {
+      Clear-Host
+      Write-Host "Validation Settings Coming soon!"
+      Pause
+    }
+    '5' {
       Start-Process "https://www.discord.com/invite/YmmCnwzwsV"
       Show-Menu
     }
@@ -210,6 +217,33 @@ _______________________________________________________________________
   Test-Folder -dir "C:\users\$($username)\appdata\local\temp"
   Test-Folder -dir "C:\users\$($username)\appdata\roaming"
 
+}
+
+function Remove-AdobeFromRegistry {
+  Clear-Host
+  Write-Host = @"
+=======================================================================
+                  ADOBE REGISTRY KEYS CLEANER
+=======================================================================
+
+"@
+  Write-Host "[i] Removing registry values.."
+  if (Get-Item -Path HKCU:\SOFTWARE\Adobe -Verbose) {
+    Remove-Item -Path HKCU:\SOFTWARE\AdobeL -Recurse -Force -Verbose
+  } else {
+    Write-Host "[?] Current User registry does not contain the Adobe keys."
+  }
+
+  if (Get-Item -Path HKLM:\SOFTWARE\Adobe -Verbose) {
+    Remove-Item -Path HKLM:\SOFTWARE\Adobe -Recurse -Force -Verbose
+  } else {
+    Write-Host "[?] Local Machine registry does not contain the Adobe keys."
+  }
+  Write-Host "[i] Keys removed."
+  Write-Host @"
+_______________________________________________________________________
+"@
+  Read-Host "Press Enter to continue..."
 }
 
 
