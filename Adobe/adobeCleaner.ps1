@@ -3,7 +3,7 @@
 function Show-Menu {
   $menuOptions = @"
 =======================================================================
-                ADOBE REMNANT CLEANER - BUILD 200324
+                ADOBE REMNANT CLEANER - BUILD 2003243
 =======================================================================
 
     Options                      Desc
@@ -41,6 +41,7 @@ Please select an option on your keyboard:
       Clear-Host
       Write-Host "Validation Settings Coming soon!"
       Pause
+      Show-Menu
     }
     '5' {
       Start-Process "https://www.discord.com/invite/YmmCnwzwsV"
